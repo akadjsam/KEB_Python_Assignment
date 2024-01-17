@@ -1,30 +1,42 @@
-# 6.5 - 1
-# numbers = [3,2,1,0]
-# for i in numbers:
-#     print(i,end=" ")
+# import copy
+# # 8.6 - 1
+# e2f = dict(dog="chien", cat="chat", walrus="morse")
+# for i,j in e2f.items():
+#     print(f'{i} : {j}')
+# print()
+#
+# # 8.6 - 2
+# print(e2f.get("walrus"))
+# print()
+#
+# #8.6 - 3
+# f2e = e2f.items()
+# print(f2e)
+# print()
+#
+# #8.6 - 4
+# print(list(e2f.keys())[0])
+# print()
+#
+# #8.6 - 5
+# print(", ".join(e2f.keys()))
+#
+# # 8.6 - 6
+# life = {"animals" : {"cats" : "Henri", "octopi" : "Grumpy", "emus" : "Lucy"}, "plants" : " ", "other" : " "}
+#
+# # 8.6 - 7
+# print(", ".join(life.keys()))
+# print()
+#
+# # 8.6 - 8
+# print(", ".join(life.get("animals").keys()))
+# print()
+#
+# # 8.6 - 9
+# print(life.get("animals").get("cats"))
+# print()
 
-# 6.5 - 2
-# guess_me = 7
-# number = 1
-# while True:
-#     if number < guess_me:
-#         print('too low')
-#     elif guess_me > number:
-#         print('oops')
-#         break
-#     else:
-#         print('found it!')
-#         break
-#     number += 1
-
-# 6.5 - 3
-guess_me = 5
-for number in range(10):
-    if number < guess_me:
-        print('too low')
-    elif guess_me > number:
-        print('oops')
-        break
-    else:
-        print('found it!')
-        break
+# 8.6 - 10
+squares = {i : i*i for i in range(10)}
+print(squares)
+print(type(squares))
