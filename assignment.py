@@ -1,42 +1,47 @@
-# import copy
-# # 8.6 - 1
-# e2f = dict(dog="chien", cat="chat", walrus="morse")
-# for i,j in e2f.items():
-#     print(f'{i} : {j}')
-# print()
-#
-# # 8.6 - 2
-# print(e2f.get("walrus"))
-# print()
-#
-# #8.6 - 3
-# f2e = e2f.items()
-# print(f2e)
-# print()
-#
-# #8.6 - 4
-# print(list(e2f.keys())[0])
-# print()
-#
-# #8.6 - 5
-# print(", ".join(e2f.keys()))
-#
-# # 8.6 - 6
-# life = {"animals" : {"cats" : "Henri", "octopi" : "Grumpy", "emus" : "Lucy"}, "plants" : " ", "other" : " "}
-#
-# # 8.6 - 7
-# print(", ".join(life.keys()))
-# print()
-#
-# # 8.6 - 8
-# print(", ".join(life.get("animals").keys()))
-# print()
-#
-# # 8.6 - 9
-# print(life.get("animals").get("cats"))
-# print()
+#9.16 - 1
+# def good():
+#     return ['Harry', 'Ron', 'Hermione']
+# print(good())
 
-# 8.6 - 10
-squares = {i : i*i for i in range(10)}
-print(squares)
-print(type(squares))
+#9.16 - 2
+# def get_odds(first=0,last=10):
+#     num = first
+#     while num < last:
+#         if num % 2 == 1:
+#             yield num
+#         num += 1
+#odd_test = get_odds()
+
+#generator comprehension
+# odd_test = (i for i in range(10) if i % 2 == 1)
+# count = 0
+# for i in odd_test:
+#     count += 1
+#     if count == 3:
+#         print(i)
+#         break
+
+#9.16 - 3
+# def test_deco(func):
+#     def new_func(*args,**kwargs):
+#         print('start')
+#         f = func(*args,**kwargs)
+#         print('end')
+#         return f
+#     return new_func
+# @test_deco
+# def test_func(a, b):
+#     return a + b
+# print(test_func(5,8))
+
+#9.16 - 4
+# class OopsException(Exception):
+#     print('Caught an oops')
+#
+# words = ['ent','mee','min','MO']
+# try:
+#     for i in words:
+#         if i.isupper():
+#             raise OopsException(i)
+# except OopsException as exc:
+#     print('예외 발생 : ', exc)j
