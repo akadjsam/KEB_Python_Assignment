@@ -1,3 +1,5 @@
+
+
 class Pokemon:
     def __init__(self):
         self.private_name = None
@@ -7,6 +9,7 @@ class Pokemon:
         self.private_special_attack_rate = None
         self.private_special_defence_rate = None
         self.private_speed_rate = None
+        self.level = None
         self.skill = {}
 
 #####################################################
@@ -68,9 +71,32 @@ class Pokemon:
 
 #####################################################
 
-    def attack(self,target,skill_number):
-        attack_name = list(target.skill.keys())[skill_number]
-        print(f'{self.private_name}이(가) {target.private_name}에게 {attack_name}공격을 시전!')
-        if target.skill.get(attack_name)[1] == 'physics':
-            print('physics')
+    # 데미지 연산은 다음과 같이 정의한다.
+    # 데미지 = 위력 × 공격 or 특수공격 × (레벨 × 2 ÷ 5 + 2 ) ÷ 방어 or 특수방어 ÷ 50 + 2
 
+    def attack(self,target,skill_number):
+        attack_name = list(self.skill.keys())[skill_number] #키값 추출 후 리스트로 형 변환
+        print(attack_name)
+        print(f'{self.private_name}이(가) {target.private_name}에게 {attack_name}공격을 시전!')
+
+        if self.skill.get(attack_name)[1] == 'physics': #물리공격
+            damage = int((self.skill.get(attack_name)[0] * self.private_attack_rate) \
+                         * (self.level * 2 / 5 + 2) / target.private_defence_rate / 50 + 2)
+            if damage <= 0:
+                damage = 0
+            target.private_hp = target.private_hp - damage
+            if target.private_hp <= 0:
+                print(f'{target.private_name}이(가) 사망했습니다.')
+            else:
+                print(f'{target.private_name}의 체력이 {target.private_hp} 남았습니다.')
+
+        elif self.skill.get(attack_name)[1] == 'special': #특수공격
+            damage = int((self.skill.get(attack_name)[0] * self.private_special_attack_rate)\
+                     * (self.level * 2 / 5 + 2) / target.private_special_defence_rate / 50 + 2)
+            if damage <= 0:
+                damage = 1
+            target.private_hp = target.private_hp - damage
+            if target.private_hp <= 0:
+                print(f'{target.private_name}이(가) 사망했습니다.')
+            else:
+                print(f'{target.private_name}의 체력이 {target.private_hp} 남았습니다.')
