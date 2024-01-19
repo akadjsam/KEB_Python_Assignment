@@ -23,3 +23,7 @@ class Chimchar(pokemon.Pokemon):
         super().attack(target, skill_number)
 
 
+if __name__ == '__main__':
+    print("불꽃숭이 -> 파이숭이 -> 초염몽")
+
+

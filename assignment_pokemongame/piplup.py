@@ -21,3 +21,6 @@ class Piplup(pokemon.Pokemon):
 
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
+
+if __name__ == '__main__':
+    print("팽도리 -> 팽태자 -> 엠페르트")

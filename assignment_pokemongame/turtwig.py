@@ -22,4 +22,5 @@ class Turtwig(pokemon.Pokemon):
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
 
-
+        if __name__ == '__main__':
+            print("모부기 -> 수풀부기 -> 토대부기")
