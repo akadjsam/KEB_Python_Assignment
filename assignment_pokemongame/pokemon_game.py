@@ -1,6 +1,8 @@
 #플레이어의 포켓몬은 4세대 스타팅 포켓몬으로 하였다.
 #데미지 계산 공식은 1세대 기준을 참고하여 설정하였다.
 #전투가 종료되면 플레이어의 포켓몬들은 자동 치료
+#능력치 설정 기준 : (종족값 * 2 + 개체값(15로 고정) / 4 ) / 2 + 10 + 레벨
+import random
 import sys
 import time
 
@@ -23,6 +25,23 @@ def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
     else:
         monster = piplup.Piplup()
     return monster
+def battle(player1,player2):
+    if player1.speed_rate >= player2.speed_rate:
+        player1.attack(player2, choice_skill_number - 1)
+        if player2.hp <= 0:
+            player1.experience_value(player2)
+            return 1
+        player2.attack(player1, random.randrange(4))
+        if player1.hp <= 0:
+            return 1
+    else:
+        player2.attack(player1, random.randrange(4))
+        if player1.hp <= 0:
+            return 1
+        player1.attack(player2, choice_skill_number - 1)
+        if player2.hp <= 0:
+            player1.experience_value(player2)
+            return 1
 
 if __name__ == '__main__':
 
@@ -41,12 +60,15 @@ if __name__ == '__main__':
             select_pokemon = input('1)모부기\t2)팽도리\t3)불꽃숭이 : ')
             if select_pokemon == '1':
                 player = turtwig.Turtwig()
+                player.ability()
                 break
             elif select_pokemon == '2':
                 player = piplup.Piplup()
+                player.ability()
                 break
             elif select_pokemon == '3':
                 player = chimchar.Chimchar()
+                player.ability()
                 break
             else:
                 print("다시 선택하세요")
@@ -55,22 +77,45 @@ if __name__ == '__main__':
             sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.")
 
     while True:
+        print(player.hp)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투\t3)포켓몬 관장에게 도전하기({1}번째 관장)" : ')
         if menu == '1':
-            enemy = wild_pokemon(player.level)
+            enemy= wild_pokemon(player.level)
+            enemy.ability()
             print(f'"앗! 야생의 {enemy.name}이(가) 나타났다!"')
             while True:
-                choice = input("1)싸운다.\t2)도망간다.\t3)포획한다.")
-                if choice == '1':
+                choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
+                if choice == '1': #포켓몬 배틀
                     while True:
                         print()
                         print("사용할 스킬을 선택하세요(1 ~ 4)")
-                        choice_skill_number = input(", ".join(list(player.skill.keys())))
-                        if choice_skill_number == '1' or '2' or '3' or '4':
+                        print(", ".join(list(player.skill.keys()))," : ")
+                        choice_skill_number = input()
+                        if choice_skill_number in ('1', '2', '3', '4'):
                             choice_skill_number = int(choice_skill_number)
-                            player.attack(enemy,choice_skill_number-1)
+                            battle_end_flag = battle(player,enemy)
+                            if battle_end_flag == 1:
+                                break
                             print()
-                            break
                         else:
                             print("1,2,3,4 중에 한개를 골라주세요!")
-        break
+                    if battle_end_flag == 1:
+                        battle_end_flag = 0
+                        player.ability()
+                        break
+                elif choice == '2':
+                    if player.speed_rate <= enemy.speed_rate:
+                        print("도망칠 수 없습니다!")
+                    else:
+                        print("무사히 도망쳤다!")
+                        break
+                elif choice == '3':
+                    pass
+
+        elif menu == '2':
+            pass
+
+        elif menu == '3':
+            pass
+        else:
+            print("메뉴중에 선택하세요!")

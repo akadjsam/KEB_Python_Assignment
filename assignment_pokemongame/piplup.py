@@ -10,15 +10,27 @@ class Piplup(pokemon.Pokemon):
     def __init__(self):
         super().__init__()
         self.name = '팽도리'
-        self.hp = 53
-        self.attack_rate = 51
-        self.defence_rate = 53
-        self.special_attack_rate = 61
-        self.special_defence_rate = 56
-        self.speed_rate = 40
+        #초반 체력 초기화
+        self.hp = 0
+        self.attack_rate = 0
+        self.defence_rate = 0
+        self.special_attack_rate = 0
+        self.special_defence_rate = 0
+        self.speed_rate = 0
+
+        self.race_hp = 53
+        self.race_attack_rate = 51
+        self.race_defence_rate = 53
+        self.race_special_attack_rate = 61
+        self.race_special_defence_rate = 56
+        self.race_speed_rate = 40
+
         self.xp = 0
         self.level = 5
         self.skill = {"막치기" : (40,'physics') , "거품광선" : (65,'special'), "회전부리" : (80,'physics'), "하이드로펌프" : (120,'special')}
+
+    def ability(self):
+        super().ability()
 
     def experience_value(self, target):
         super().experience_value(target)
