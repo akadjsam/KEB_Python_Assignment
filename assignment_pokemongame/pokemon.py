@@ -9,7 +9,8 @@ class Pokemon:
         self.private_special_attack_rate = None
         self.private_special_defence_rate = None
         self.private_speed_rate = None
-        self.level = None
+        self.level = 0
+        self.xp = 0
         self.skill = {}
 
 #####################################################
@@ -69,6 +70,18 @@ class Pokemon:
     def speed_rate(self, new):
         self.private_speed_rate = new
 
+#레벨업 조건 level**3 의 경험치를 획득하면 레벨업
+    def experience_value(self,target):
+        self.xp += target.level**3
+        self.level_up()
+    def level_up(self):
+        if self.xp >= self.level**3:
+            self.level += 1
+            self.xp = 0
+            print(f"레벨업! {self.private_name}의 레벨은 {self.level}입니다.")
+
+
+
 #####################################################
 
     # 데미지 연산은 다음과 같이 정의한다.
@@ -76,8 +89,7 @@ class Pokemon:
 
     def attack(self,target,skill_number):
         attack_name = list(self.skill.keys())[skill_number] #키값 추출 후 리스트로 형 변환
-        print(attack_name)
-        print(f'{self.private_name}이(가) {target.private_name}에게 {attack_name}공격을 시전!')
+        print(f' {self.private_name}이(가) {target.private_name}에게 {attack_name}공격을 시전!')
 
         if self.skill.get(attack_name)[1] == 'physics': #물리공격
             damage = int((self.skill.get(attack_name)[0] * self.private_attack_rate) \

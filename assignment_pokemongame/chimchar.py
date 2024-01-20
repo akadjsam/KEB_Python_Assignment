@@ -16,11 +16,16 @@ class Chimchar(pokemon.Pokemon):
         self.special_attack_rate = 58
         self.special_defence_rate = 44
         self.speed_rate = 61
+        self.xp = 0
         self.level = 5
         self.skill = {"할퀴기" : (40,'physics'), "불꽃세레" : (40,'special'), "인파이트" : (120,'physics'), "화염방사" : (95,'special')}
 
+    def experience_value(self, target):
+        super().experience_value(target)
+
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
+
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 #플레이어의 포켓몬은 4세대 스타팅 포켓몬으로 하였다.
 #데미지 계산 공식은 1세대 기준을 참고하여 설정하였다.
+#전투가 종료되면 플레이어의 포켓몬들은 자동 치료
 import sys
 import time
 
@@ -8,15 +9,23 @@ import chimchar, piplup, turtwig
 # c1 = chimchar.Chimchar()
 # p1 = piplup.Piplup()
 # t1 = turtwig.Turtwig()
-#
+
 # c1.attack(p1,1)
-# p1.attack(t1,1)
-# t1.attack(c1,1)
-def print_delay(message):
+# # p1.attack(t1,1)
+# # t1.attack(c1,1)
+# c1.experience_value(p1)
+def print_delay(message): #print dr.ma's message
     print(message)
     time.sleep(2)
+def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
+    if level < 3:
+        monster = chimchar.Chimchar()
+    else:
+        monster = piplup.Piplup()
+    return monster
 
 if __name__ == '__main__':
+
     # print_delay('흐음!! 잘왔다! 포켓몬스터의 세계에 온 것을 환영한다!')
     # print_delay('내 이름은 마박사! 모두가 포켓몬 박사님이라고 부르고 있단다. 이 세계에는 포켓몬스터, 줄여서 포켓몬이라 불리는 생명체가 도처에 살고 있다!')
     # print_delay('우리 인간은 포켓몬과 사이좋게 살고 있지. 함께 놀기도 하고 힘을 합쳐 일하기도 하고 그리고 포켓몬끼리 싸우게 하여 유대감을 돈독히 다지기도 하고...')
@@ -25,7 +34,8 @@ if __name__ == '__main__':
     # print_delay('거기서 너는 여러 포켓몬이나 많은 사람들과 만나 무언가를 발견하게 되겠지.')
     # print_delay('그럼 포켓몬스터의 세계로!')
     # time.sleep(2)
-    while True:
+
+    while True: #select player's starting pokemon
         print("포켓몬을 선택하세요",end=' ')
         try:
             select_pokemon = input('1)모부기\t2)팽도리\t3)불꽃숭이 : ')
@@ -41,4 +51,26 @@ if __name__ == '__main__':
             else:
                 print("다시 선택하세요")
         except Exception as e:
-            sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.",e)
+            print(e)
+            sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.")
+
+    while True:
+        menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투\t3)포켓몬 관장에게 도전하기({1}번째 관장)" : ')
+        if menu == '1':
+            enemy = wild_pokemon(player.level)
+            print(f'"앗! 야생의 {enemy.name}이(가) 나타났다!"')
+            while True:
+                choice = input("1)싸운다.\t2)도망간다.\t3)포획한다.")
+                if choice == '1':
+                    while True:
+                        print()
+                        print("사용할 스킬을 선택하세요(1 ~ 4)")
+                        choice_skill_number = input(", ".join(list(player.skill.keys())))
+                        if choice_skill_number == '1' or '2' or '3' or '4':
+                            choice_skill_number = int(choice_skill_number)
+                            player.attack(enemy,choice_skill_number-1)
+                            print()
+                            break
+                        else:
+                            print("1,2,3,4 중에 한개를 골라주세요!")
+        break

@@ -16,8 +16,12 @@ class Piplup(pokemon.Pokemon):
         self.special_attack_rate = 61
         self.special_defence_rate = 56
         self.speed_rate = 40
+        self.xp = 0
         self.level = 5
         self.skill = {"막치기" : (40,'physics') , "거품광선" : (65,'special'), "회전부리" : (80,'physics'), "하이드로펌프" : (120,'special')}
+
+    def experience_value(self, target):
+        super().experience_value(target)
 
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
