@@ -6,7 +6,7 @@ import random
 import sys
 import time
 
-import chimchar, piplup, turtwig
+import chimchar, piplup, turtwig, starly, gible
 
 # c1 = chimchar.Chimchar()
 # p1 = piplup.Piplup()
@@ -52,8 +52,9 @@ if __name__ == '__main__':
     # print_delay('이제부터 너만의 이야기가 시작된다!')
     # print_delay('거기서 너는 여러 포켓몬이나 많은 사람들과 만나 무언가를 발견하게 되겠지.')
     # print_delay('그럼 포켓몬스터의 세계로!')
-    # time.sleep(2)
+    # time.sleep(1)
 
+    pokemon_list = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
     while True: #select player's starting pokemon
         print("포켓몬을 선택하세요",end=' ')
         try:
@@ -70,12 +71,16 @@ if __name__ == '__main__':
                 player = chimchar.Chimchar()
                 player.ability()
                 break
+            elif select_pokemon == '981123':
+                player = gible.Gible()
+                player.ability()
+                break
             else:
                 print("다시 선택하세요")
         except Exception as e:
             print(e)
             sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.")
-
+    print(f'스타팅 포켓몬으로 {player.name}을(를) 선택하셨습니다.')
     while True:
         print(player.hp)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투\t3)포켓몬 관장에게 도전하기({1}번째 관장)" : ')
@@ -101,7 +106,7 @@ if __name__ == '__main__':
                             print("1,2,3,4 중에 한개를 골라주세요!")
                     if battle_end_flag == 1:
                         battle_end_flag = 0
-                        player.ability()
+                        player.ability() #전투 종료후 플레이어의 능력치 재설정
                         break
                 elif choice == '2':
                     if player.speed_rate <= enemy.speed_rate:
@@ -110,12 +115,12 @@ if __name__ == '__main__':
                         print("무사히 도망쳤다!")
                         break
                 elif choice == '3':
-                    pass
+                    print("개발 진행중입니다.")
 
         elif menu == '2':
-            pass
+            print("개발 진행중입니다.")
 
         elif menu == '3':
-            pass
+            print("개발 진행중입니다.")
         else:
             print("메뉴중에 선택하세요!")

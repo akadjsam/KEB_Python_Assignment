@@ -20,7 +20,7 @@ class Pokemon:
         self.xp = 0
         self.skill = {}
 
-# 능력치 설정 기준 : (종족값 * 2 + 개체값(15로 고정) ) / 2 + 10 + 레벨
+    # 능력치 설정 기준 : (종족값 * 2 + 개체값(15로 고정) ) / (레벨/100) + 10 + 레벨
     def ability(self):
         self.hp = int((self.race_hp * 2 + 15) * (self.level / 100) + 10 + self.level)
         self.attack_rate = int((self.race_attack_rate * 2 + 15) * (self.level / 100) + 10 + self.level)
@@ -29,7 +29,8 @@ class Pokemon:
         self.special_defence_rate = int((self.race_special_defence_rate * 2 + 15) * (self.level / 100) + 10 + self.level)
         self.speed_rate = int((self.race_speed_rate * 2 + 15) * (self.level / 100) + 10 + self.level)
 
-#레벨업 조건 level**3 의 경험치를 획득하면 레벨업
+
+    # 레벨업 조건 level**3 의 경험치를 획득하면 레벨업
     def experience_value(self,target):
         self.xp += target.level**3
         self.level_up()
@@ -44,7 +45,6 @@ class Pokemon:
 
     # 데미지 연산은 다음과 같이 정의한다.
     # 데미지 = 위력 × 공격 or 특수공격 × (레벨 × 2 ÷ 5 + 2 ) ÷ 방어 or 특수방어 ÷ 50 + 2
-
     def attack(self,target,skill_number):
         attack_name = list(self.skill.keys())[skill_number] #키값 추출 후 리스트로 형 변환
         print(f'{self.name}이(가) {target.name}에게 {attack_name} 공격을 시전!')

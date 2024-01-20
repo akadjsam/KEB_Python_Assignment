@@ -29,7 +29,7 @@ class Piplup(pokemon.Pokemon):
         self.level = 5
         self.skill = {"막치기" : (40,'physics') , "거품광선" : (65,'special'), "회전부리" : (80,'physics'), "하이드로펌프" : (120,'special')}
 
-    def ability(self):
+    def ability(self): #포켓몬 실제 능력치 계산
         super().ability()
 
     def experience_value(self, target):
@@ -37,6 +37,27 @@ class Piplup(pokemon.Pokemon):
 
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
+
+    def evolve(self):
+        if self.level == 16:
+            print('팽도리가 팽태자로 진화하였습니다!')
+            self.name = '팽태자'
+            self.race_hp = 64
+            self.race_attack_rate = 66
+            self.race_defence_rate = 68
+            self.race_special_attack_rate = 81
+            self.race_special_defence_rate = 76
+            self.race_speed_rate = 50
+
+        elif self.level == 36:
+            print('팽태자가 엠페르트로 진화하였습니다!')
+            self.name = '엠페르트'
+            self.race_hp = 84
+            self.race_attack_rate = 86
+            self.race_defence_rate = 88
+            self.race_special_attack_rate = 111
+            self.race_special_defence_rate = 101
+            self.race_speed_rate = 60
 
 if __name__ == '__main__':
     print("팽도리 -> 팽태자 -> 엠페르트")
