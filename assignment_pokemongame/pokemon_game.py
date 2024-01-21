@@ -2,6 +2,8 @@
 #데미지 계산 공식은 1세대 기준을 참고하여 설정하였다.
 #전투가 종료되면 플레이어의 포켓몬들은 자동 치료
 #능력치 설정 기준 : (종족값 * 2 + 개체값(15로 고정) / 4 ) / 2 + 10 + 레벨
+#추후 개발 예정
+#포켓몬 포획, 가상의 트레이너와 승부, 포켓몬 관장, 갤럭시단, 전설의 포켓몬, 사천왕, 챔피언
 import random
 import sys
 import time
@@ -20,9 +22,9 @@ def print_delay(message): #print dr.ma's message
     print(message)
     time.sleep(2)
 def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
-    if level < 3:
-        monster = chimchar.Chimchar()
-    else:
+    if level < 10:
+        monster = starly.Starly()
+    elif level < 15:
         monster = piplup.Piplup()
     return monster
 def battle(player1,player2):
@@ -58,7 +60,7 @@ if __name__ == '__main__':
     while True: #select player's starting pokemon
         print("포켓몬을 선택하세요",end=' ')
         try:
-            select_pokemon = input('1)모부기\t2)팽도리\t3)불꽃숭이 : ')
+            select_pokemon = input('1)모부기\t2)팽도리\t3)불꽃숭이 4)프로그램 종료 : ')
             if select_pokemon == '1':
                 player = turtwig.Turtwig()
                 player.ability()
@@ -75,6 +77,8 @@ if __name__ == '__main__':
                 player = gible.Gible()
                 player.ability()
                 break
+            elif select_pokemon == '4':
+                sys.exit()
             else:
                 print("다시 선택하세요")
         except Exception as e:
@@ -83,7 +87,8 @@ if __name__ == '__main__':
     print(f'스타팅 포켓몬으로 {player.name}을(를) 선택하셨습니다.')
     while True:
         print(player.hp)
-        menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투\t3)포켓몬 관장에게 도전하기({1}번째 관장)" : ')
+        menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
+                     f'\t3)포켓몬 관장에게 도전하기({1}번째 관장)"\t4)게임 종료 : ')
         if menu == '1':
             enemy= wild_pokemon(player.level)
             enemy.ability()
@@ -122,5 +127,8 @@ if __name__ == '__main__':
 
         elif menu == '3':
             print("개발 진행중입니다.")
+        elif menu == '4':
+            print('게임을 종료합니다.')
+            break
         else:
             print("메뉴중에 선택하세요!")

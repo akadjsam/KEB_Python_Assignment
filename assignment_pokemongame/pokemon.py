@@ -1,7 +1,7 @@
 class Pokemon:
     def __init__(self):
         self.name = None
-        self.hp = [None, None]
+        self.hp = None
         self.attack_rate = None
         self.defence_rate = None
         self.special_attack_rate = None
