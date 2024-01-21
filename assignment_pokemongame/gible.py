@@ -26,7 +26,7 @@ class Gible(pokemon.Pokemon):
         self.race_speed_rate = 42
 
         self.xp = 0
-        self.level = 5
+        self.level = 48
         self.skill = {"드래곤크루" : (80,'physics'), "드래곤다이브" : (100,'physics'), "지진" : (100,'physics'), "불대문자" : (120,'special')}
 
     def ability(self): #포켓몬 실제 능력치 계산
@@ -34,6 +34,7 @@ class Gible(pokemon.Pokemon):
 
     def experience_value(self, target):
         super().experience_value(target)
+        self.evolve()
 
     def attack(self, target, skill_number):
         super().attack(target, skill_number)

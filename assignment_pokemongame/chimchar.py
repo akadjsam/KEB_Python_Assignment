@@ -34,7 +34,7 @@ class Chimchar(pokemon.Pokemon):
 
     def experience_value(self, target):
         super().experience_value(target)
-
+        self.evolve()
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
 
