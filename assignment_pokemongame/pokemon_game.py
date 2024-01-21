@@ -4,6 +4,7 @@
 #능력치 설정 기준 : (종족값 * 2 + 개체값(15로 고정) / 4 ) / 2 + 10 + 레벨
 #추후 개발 예정
 #포켓몬 포획, 가상의 트레이너와 승부, 포켓몬 관장, 갤럭시단, 전설의 포켓몬, 사천왕, 챔피언
+import copy
 import random
 import sys
 import time
@@ -56,25 +57,25 @@ if __name__ == '__main__':
     # print_delay('그럼 포켓몬스터의 세계로!')
     # time.sleep(1)
 
-    pokemon_list = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
+    player = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
     while True: #select player's starting pokemon
         print("포켓몬을 선택하세요",end=' ')
         try:
             select_pokemon = input('1)모부기\t2)팽도리\t3)불꽃숭이 4)프로그램 종료 : ')
             if select_pokemon == '1':
-                player = turtwig.Turtwig()
-                player.ability()
+                player.append(turtwig.Turtwig())
+                player[0].ability()
                 break
             elif select_pokemon == '2':
-                player = piplup.Piplup()
-                player.ability()
+                player.append(piplup.Piplup())
+                player[0].ability()
                 break
             elif select_pokemon == '3':
-                player = chimchar.Chimchar()
-                player.ability()
+                player.append(chimchar.Chimchar())
+                player[0].ability()
                 break
             elif select_pokemon == '981123':
-                player = gible.Gible()
+                player.append(gible.Gible())
                 player.ability()
                 break
             elif select_pokemon == '4':
@@ -84,13 +85,13 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
             sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.")
-    print(f'스타팅 포켓몬으로 {player.name}을(를) 선택하셨습니다.')
+    print(f'스타팅 포켓몬으로 {player[0].name}을(를) 선택하셨습니다.')
     while True:
-        print(player.hp)
+        #print(player[0].hp)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
-                     f'\t3)포켓몬 관장에게 도전하기({1}번째 관장)"\t4)게임 종료 : ')
+                     f'\t3)포켓몬 관장에게 도전하기({1}번째 관장)"\t4)내 포켓몬 확인하기\t5)게임 종료 : ')
         if menu == '1':
-            enemy= wild_pokemon(player.level)
+            enemy = wild_pokemon(int((sum(player[i].level for i in range(len(player))))/len(player)))
             enemy.ability()
             print(f'"앗! 야생의 {enemy.name}이(가) 나타났다!"')
             while True:
@@ -99,11 +100,11 @@ if __name__ == '__main__':
                     while True:
                         print()
                         print("사용할 스킬을 선택하세요(1 ~ 4)")
-                        print(", ".join(list(player.skill.keys()))," : ")
+                        print(", ".join(list(player[0].skill.keys()))," : ")
                         choice_skill_number = input()
                         if choice_skill_number in ('1', '2', '3', '4'):
                             choice_skill_number = int(choice_skill_number)
-                            battle_end_flag = battle(player,enemy)
+                            battle_end_flag = battle(player[0],enemy)
                             if battle_end_flag == 1:
                                 break
                             print()
@@ -111,16 +112,19 @@ if __name__ == '__main__':
                             print("1,2,3,4 중에 한개를 골라주세요!")
                     if battle_end_flag == 1:
                         battle_end_flag = 0
-                        player.ability() #전투 종료후 플레이어의 능력치 재설정
+                        player[0].ability() #전투 종료후 플레이어의 능력치 재설정
                         break
                 elif choice == '2':
-                    if player.speed_rate <= enemy.speed_rate:
+                    if player[0].speed_rate <= enemy.speed_rate:
                         print("도망칠 수 없습니다!")
                     else:
                         print("무사히 도망쳤다!")
                         break
                 elif choice == '3':
-                    print("개발 진행중입니다.")
+                    catch = copy.deepcopy(enemy)
+                    player.append(catch)
+                    print("포획 성공 !")
+                    break
 
         elif menu == '2':
             print("개발 진행중입니다.")
@@ -128,6 +132,8 @@ if __name__ == '__main__':
         elif menu == '3':
             print("개발 진행중입니다.")
         elif menu == '4':
+            print(", ".join([player[i].name for i in range(len(player))]))
+        elif menu == '5':
             print('게임을 종료합니다.')
             break
         else:
