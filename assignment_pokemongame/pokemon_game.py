@@ -95,8 +95,8 @@ if __name__ == '__main__':
             sys.exit("프로그램의 오류로 인하여 강제 종료됩니다.")
     print(f'스타팅 포켓몬으로 {player[0].name}을(를) 선택하셨습니다.')
     while True:
-        print(player[0].hp)
-        print(player[0].attack_rate)
+        # print(player[0].hp)
+        # print(player[0].attack_rate)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
                      f'\t3)포켓몬 관장에게 도전하기({1}번째 관장)"\t4)내 포켓몬 확인하기\t5)게임 종료 : ')
         if menu == '1':
@@ -122,6 +122,7 @@ if __name__ == '__main__':
                 elif choice == '2':
                     if player[0].speed_rate <= enemy.speed_rate:
                         print("도망칠 수 없습니다!")
+                        continue
                     else:
                         print("무사히 도망쳤다!")
                         break
@@ -163,9 +164,11 @@ if __name__ == '__main__':
 
                 elif choice == '2':
                     print("안돼! 싸움 중 등을 보일 순 없어!")
+                    continue
 
                 elif choice == '3':
                     print("남의 것에 손대면 도둑!")
+                    continue
 
                 if battle_end_flag == 1:
                     battle_end_flag = 0
