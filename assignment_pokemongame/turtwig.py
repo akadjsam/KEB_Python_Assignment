@@ -39,26 +39,26 @@ class Turtwig(pokemon.Pokemon):
     def attack(self, target, skill_number):
         super().attack(target, skill_number)
 
-        def evolve(self):
-            if self.level == 14:
-                print('모부기가 수풀부기로 진화하였습니다!')
-                self.name = '수풀부기'
-                self.race_hp = 75
-                self.race_attack_rate = 89
-                self.race_defence_rate = 85
-                self.race_special_attack_rate = 55
-                self.race_special_defence_rate = 65
-                self.race_speed_rate = 36
+    def evolve(self):
+        if self.level == 14:
+            print('모부기가 수풀부기로 진화하였습니다!')
+            self.name = '수풀부기'
+            self.race_hp = 75
+            self.race_attack_rate = 89
+            self.race_defence_rate = 85
+            self.race_special_attack_rate = 55
+            self.race_special_defence_rate = 65
+            self.race_speed_rate = 36
 
-            elif self.level == 36:
-                print('수풀부기가 토대부기로 진화하였습니다!')
-                self.name = '토대부기'
-                self.race_hp = 95
-                self.race_attack_rate = 109
-                self.race_defence_rate = 105
-                self.race_special_attack_rate = 75
-                self.race_special_defence_rate = 85
-                self.race_speed_rate = 56
+        elif self.level == 36:
+            print('수풀부기가 토대부기로 진화하였습니다!')
+            self.name = '토대부기'
+            self.race_hp = 95
+            self.race_attack_rate = 109
+            self.race_defence_rate = 105
+            self.race_special_attack_rate = 75
+            self.race_special_defence_rate = 85
+            self.race_speed_rate = 56
 
         if __name__ == '__main__':
             print("모부기 -> 수풀부기 -> 토대부기")

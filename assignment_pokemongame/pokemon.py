@@ -56,7 +56,8 @@ class Pokemon:
                 damage = 0
             target.hp = target.hp - damage
             if target.hp <= 0:
-                print(f'{target.name}이(가) 사망했습니다.')
+                target.hp = 0
+                print(f'{target.name}이(가) 쓰러졌습니다.')
             else:
                 print(f'{target.name}의 체력이 {target.hp} 남았습니다.')
 
@@ -67,6 +68,7 @@ class Pokemon:
                 damage = 1
             target.hp = target.hp - damage
             if target.hp <= 0:
-                print(f'{target.name}이(가) 쓰려졌습니다.')
+                target.hp = 0
+                print(f'{target.name}이(가) 쓰러졌습니다.')
             else:
                 print(f'{target.name}의 체력이 {target.hp} 남았습니다.')

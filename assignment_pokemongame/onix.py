@@ -25,7 +25,7 @@ class Onix(pokemon.Pokemon):
         self.race_speed_rate = 70
 
         self.xp = 0
-        self.level = 12
+        self.level = 10
         self.skill = {"번개엄니" : (65,'physics'), "용의숨결" : (60,'special'), "아이언테일" : (100,'physics'), "이판사판태클" : (120,'physics')}
 
     def ability(self): #포켓몬 실제 능력치 계산

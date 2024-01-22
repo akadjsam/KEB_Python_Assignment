@@ -26,7 +26,7 @@ class Geodude(pokemon.Pokemon):
         self.race_speed_rate = 20
 
         self.xp = 0
-        self.level = 12
+        self.level = 10
         self.skill = {"몸통박치기" : (35,'physics'), "지진" : (100,'physics'), "돌떨구기" : (50,'physics'), "이판사판태클" : (120,'physics')}
 
     def ability(self): #포켓몬 실제 능력치 계산

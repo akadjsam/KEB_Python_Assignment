@@ -62,6 +62,6 @@ class Gible(pokemon.Pokemon):
 
 
 if __name__ == '__main__':
-    print("찌르꼬 -> 찌르버드 -> 찌르호크")
+    print("딥상어동 -> 한바이트 -> 한카리아스")
 
 
