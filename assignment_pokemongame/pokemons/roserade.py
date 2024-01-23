@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #로즈레이드 체육관 관장용 체종진화체만 만듦
 
 class Roserade(pokemon.Pokemon):

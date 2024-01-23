@@ -1,5 +1,5 @@
 #모부기
-import pokemon
+from assignment_pokemongame import pokemon
 
 class Turtwig(pokemon.Pokemon):
     """

@@ -10,7 +10,7 @@ import random
 import sys
 import time
 
-import chimchar, piplup, turtwig, starly, gible, geodude, cranidos, onix
+from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude
 import kangsuk,uchae
 
 def print_delay(message): #print dr.ma's message
@@ -244,6 +244,7 @@ if __name__ == '__main__':
                         pokemon_badge += 1
                         break
             f1.lose_dialogue() #패배 대사
+            print("포켓몬 벳지를 1개")
         elif menu == '4':
             print(", ".join([(f'{i+1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
             decide_change = input("포켓몬 순서를 변경하시겠습니까? : 1)예\t2)아니요 : ")#change_sequence

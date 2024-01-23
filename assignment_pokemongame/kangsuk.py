@@ -1,5 +1,4 @@
 #first director of pokemon
-import cranidos, geodude, onix
 from pokemon_game import *
 class Kangsuk:
     def __init__(self):
@@ -26,3 +25,4 @@ class Kangsuk:
     def lose_dialogue(self):
         print("이,이럴수가! 열심히 단련시킨 포켓몬들이!!")
         time.sleep(1)
+        print("콜벳지를 획득하였다!")

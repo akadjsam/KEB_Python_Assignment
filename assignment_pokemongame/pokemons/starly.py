@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #찌르꼬
 
 class Starly(pokemon.Pokemon):

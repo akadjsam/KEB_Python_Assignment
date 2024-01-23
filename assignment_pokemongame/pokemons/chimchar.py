@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #불꽃숭이
 
 class Chimchar(pokemon.Pokemon):

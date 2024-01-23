@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #롱스톤
 
 class Onix(pokemon.Pokemon):

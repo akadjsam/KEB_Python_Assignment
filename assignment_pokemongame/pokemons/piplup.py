@@ -1,5 +1,5 @@
 #팽도리
-import pokemon
+from assignment_pokemongame import pokemon
 
 class Piplup(pokemon.Pokemon):
     """

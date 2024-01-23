@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #두개도스
 
 class Cranidos(pokemon.Pokemon):

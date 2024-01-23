@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #체리버
 
 class Cherubi(pokemon.Pokemon):

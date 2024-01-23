@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #딥상어동
 
 class Gible(pokemon.Pokemon):

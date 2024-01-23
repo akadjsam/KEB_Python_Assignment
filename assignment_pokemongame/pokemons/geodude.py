@@ -1,4 +1,4 @@
-import pokemon
+from assignment_pokemongame import pokemon
 #꼬마돌
 
 class Geodude(pokemon.Pokemon):
