@@ -24,6 +24,7 @@ class Gible(pokemon.Pokemon):
         self.race_special_attack_rate = 40
         self.race_special_defence_rate = 45
         self.race_speed_rate = 42
+        self.level_flag = 1
 
         self.xp = 0
         self.level = 48
@@ -41,7 +42,10 @@ class Gible(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 24:
-            print('딥상어동이 한바이트로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('딥상어동이 한바이트로 진화하였습니다!')
+                self.level_flag = 0
+
             self.name = '한바이트'
             self.race_hp = 68
             self.race_attack_rate = 90
@@ -51,7 +55,10 @@ class Gible(pokemon.Pokemon):
             self.race_speed_rate = 55
 
         elif self.level == 48:
-            print('한바이트가 한카리아스로 진화하였습니다!')
+            if self.level_flag == 0:
+                print('한바이트가 한카리아스로 진화하였습니다!')
+                self.level_flag = 1
+
             self.name = '한카리아스'
             self.race_hp = 108
             self.race_attack_rate = 130

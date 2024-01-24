@@ -24,6 +24,7 @@ class Geodude(pokemon.Pokemon):
         self.race_special_attack_rate = 30
         self.race_special_defence_rate = 30
         self.race_speed_rate = 20
+        self.level_flag = 1
 
         self.xp = 0
         self.level = 10
@@ -41,7 +42,9 @@ class Geodude(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 25:
-            print('꼬마돌이 데구리로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('꼬마돌이 데구리로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '데구리'
             self.race_hp = 55
             self.race_attack_rate = 95
@@ -51,7 +54,9 @@ class Geodude(pokemon.Pokemon):
             self.race_speed_rate = 35
 
         elif self.level == 45:
-            print('데구리가 딱구리로 진화하였습니다!')
+            if self.level_flag == 0:
+                print('데구리가 딱구리로 진화하였습니다!')
+                self.level_flag = 1
             self.name = '딱구리'
             self.race_hp = 80
             self.race_attack_rate = 120

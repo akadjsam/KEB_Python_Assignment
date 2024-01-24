@@ -1,6 +1,6 @@
-#third director of pokemon
-from assignment_pokemongame.pokemons import cherubi, roserade
-from pokemon_game import *
+#fifth director of pokemon
+from assignment_pokemongame.pokemon_game import *
+from assignment_pokemongame.function import *
 class Melisa:
     def __init__(self):
         self.name = '멜리사'

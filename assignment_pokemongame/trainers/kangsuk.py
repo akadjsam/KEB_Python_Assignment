@@ -1,5 +1,6 @@
 #first director of pokemon
-from pokemon_game import *
+from assignment_pokemongame.pokemon_game import *
+from assignment_pokemongame.function import *
 class Kangsuk:
     def __init__(self):
         self.name = '강석'
@@ -25,4 +26,4 @@ class Kangsuk:
     def lose_dialogue(self):
         print("이,이럴수가! 열심히 단련시킨 포켓몬들이!!")
         time.sleep(1)
-        print("콜벳지를 획득하였다!")
+        print("콜벳지를 획득하였습니다!")

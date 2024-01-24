@@ -5,17 +5,37 @@
 #추후 개발 예정
 #타입 상성, 기술 상성
 #가상의 트레이너와 승부, 포켓몬 관장, 갤럭시단, 전설의 포켓몬, 사천왕, 챔피언
+
+#포켓몬 관장 - 콜벳지(강석), 포리스트벳지(유채), 코블벳지(자두),팬벳지(맥실러), 레릭벳지(멜리사), 마인벳지(동관), 글레이셔벳지(무청), 비컨벳지(전진)
+#사천왕 - 충호, 들국화, 대엽, 오엽
+#챔피언 - 난천
+
+#강석 - 꼬마돌,롱스톤,두개도스
+#유채 - 모부기,체리꼬,로즈레이드
+#자두 - 요가랑, 근육몬, 루카리오
+#맥실러 - 갸라도스,누오,플로젤
+#멜리사 - 둥실라이드, 팬텀, 무우마직
+#동관 - 동미러,강철톤,바리톱스
+#무청 - 눈쓰개, 포푸니, 요가램, 눈설왕
+#전진 - 쥬피썬더,라이츄,렌트라,에레키블
+
+#충호 - 메가자리,핫삼,비퀸,헤라크로스,드래피온
+#들국화 - 누오,꼬지모,딱구리,메깅,하마돈
+#대엽 - 헬가,부스터,날쌩마,초염몽,마그마번
+#오엽 - 마임맨,에브이,동탁군,후딘,엘레이드
+#난천 - 화강돌,로즈레이드,밀로틱,루카리오,토게키스,한카리아스
 import copy
 import random
 import sys
-import time
 
-from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude
-import kangsuk,uchae
+from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade
 
-def print_delay(message): #print dr.ma's message
-    print(message)
-    time.sleep(1)
+from assignment_pokemongame.trainers import uchae, kangsuk, melisa
+
+
+# def print_delay(message): #print delay message
+#     print(message)
+#     time.sleep(1)
 def select_starting():
     while True:  # select player's starting pokemon
         print("포켓몬을 선택하세요", end=' ')
@@ -83,12 +103,13 @@ def change_pokemon(change):
             print("해당 위치에 포켓몬이 없습니다!")
         else:
             player[0], player[int(change) - 1] = player[int(change) - 1], player[0]
-
 def set_director(badge):
     if badge == 0:
         champion = kangsuk.Kangsuk()
-    else:
+    elif badge == 1:
         champion = uchae.Uchae()
+    elif badge == 2:
+        champion = melisa.Melisa()
     return champion
 
 if __name__ == '__main__':
@@ -102,8 +123,9 @@ if __name__ == '__main__':
     # print_delay('그럼 포켓몬스터의 세계로!')
     # time.sleep(1)
 
-    global pokemon_badge #포켓몬 벳지 수
+    #global pokemon_badge #포켓몬 벳지 수
     pokemon_badge = 0
+    lose_flag = 0
     player = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
     select_starting() #스타팅 포켓몬 고르기
     print(f'스타팅 포켓몬으로 {player[0].name}을(를) 선택하셨습니다.')
@@ -173,7 +195,9 @@ if __name__ == '__main__':
                             print("포획에 실패했습니다!")
                             continue
                     break
-
+                else:
+                    print("메뉴 중 선택하세요.")
+                    continue
                 if battle_end_flag == 1:
                     battle_end_flag = 0
                     [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
@@ -183,12 +207,12 @@ if __name__ == '__main__':
             print("개발 진행중입니다.")
 
         elif menu == '3':
-            f1 = set_director(pokemon_badge)
-            f1.director
-            print(f'포켓몬 관장 {f1.name}이(가) 승부를 걸어왔다!')
+            rival = set_director(pokemon_badge)
+            #.director
+            print(f'포켓몬 관장 {rival.name}이(가) 승부를 걸어왔다!')
             i = 0
-            while i < len(f1.director):
-                print(f'{f1.name}은 {f1.director[i].name}을(를) 내보냈다!')
+            while i < len(rival.director):
+                print(f'{rival.name}은 {rival.director[i].name}을(를) 내보냈다!')
                 while True:
                     choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
                     if choice == '1': #포켓몬 배틀
@@ -199,10 +223,11 @@ if __name__ == '__main__':
                             choice_skill_number = input()
                             if choice_skill_number in ('1', '2', '3', '4'):
                                 choice_skill_number = int(choice_skill_number)
-                                battle_end_flag = battle(player[0],f1.director[i])
+                                battle_end_flag = battle(player[0], rival.director[i])
                                 if player[0].hp == 0:
                                     if sum([player[i].hp for i in range(len(player))])/len(player) == 0:
                                         print("더이상 전투할 포켓몬이 없습니다. 포켓몬 센터로 이동합니다.")
+                                        lose_flag = 1
                                         break
                                     else:
                                         while True:
@@ -222,7 +247,7 @@ if __name__ == '__main__':
                                 break
                             else:
                                 print("1,2,3,4 중에 한개를 골라주세요!")
-                        if f1.director[i].hp == 0:
+                        if rival.director[i].hp == 0:
                             i += 1
                             break
 
@@ -241,10 +266,16 @@ if __name__ == '__main__':
                     if battle_end_flag == 1:
                         battle_end_flag = 0
                         [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
-                        pokemon_badge += 1
                         break
-            f1.lose_dialogue() #패배 대사
-            print("포켓몬 벳지를 1개")
+                if lose_flag == 1:
+                    break
+            if lose_flag == 1:
+                lose_flag = 0
+            else:
+                pokemon_badge += 1
+                print(pokemon_badge)
+                rival.lose_dialogue() #포켓몬 관장들 패배 대사
+                print("포켓몬 벳지를 1개를 획득하셨습니다.")
         elif menu == '4':
             print(", ".join([(f'{i+1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
             decide_change = input("포켓몬 순서를 변경하시겠습니까? : 1)예\t2)아니요 : ")#change_sequence

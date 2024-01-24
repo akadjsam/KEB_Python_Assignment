@@ -25,6 +25,7 @@ class Piplup(pokemon.Pokemon):
         self.race_special_defence_rate = 56
         self.race_speed_rate = 40
 
+        self.level_flag = 1
         self.xp = 0
         self.level = 5
         self.skill = {"막치기" : (40,'physics') , "거품광선" : (65,'special'), "회전부리" : (80,'physics'), "하이드로펌프" : (120,'special')}
@@ -41,7 +42,9 @@ class Piplup(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 16:
-            print('팽도리가 팽태자로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('팽도리가 팽태자로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '팽태자'
             self.race_hp = 64
             self.race_attack_rate = 66
@@ -51,7 +54,9 @@ class Piplup(pokemon.Pokemon):
             self.race_speed_rate = 50
 
         elif self.level == 36:
-            print('팽태자가 엠페르트로 진화하였습니다!')
+            if self.level_flag == 0:
+                print('팽태자가 엠페르트로 진화하였습니다!')
+                self.level_flag = 1
             self.name = '엠페르트'
             self.race_hp = 84
             self.race_attack_rate = 86

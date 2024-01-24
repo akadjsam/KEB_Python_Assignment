@@ -25,6 +25,7 @@ class Starly(pokemon.Pokemon):
         self.race_special_defence_rate = 30
         self.race_speed_rate = 60
 
+        self.level_flag = 1
         self.xp = 0
         self.level = 5
         self.skill = {"몸통박치기" : (35,'physics'), "날개치기" : (60,'physics'), "인파이트" : (120,'physics'), "브레이브버드" : (95,'physics')}
@@ -41,7 +42,9 @@ class Starly(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 14:
-            print('찌르꼬가 찌르버드로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('찌르꼬가 찌르버드로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '찌르버드'
             self.race_hp = 55
             self.race_attack_rate = 75
@@ -51,7 +54,9 @@ class Starly(pokemon.Pokemon):
             self.race_speed_rate = 80
 
         elif self.level == 34:
-            print('찌르버드가 찌르호그로 진화하였습니다!')
+            if self.level_flag == 0:
+                print('찌르버드가 찌르호그로 진화하였습니다!')
+                self.level_flag = 1
             self.name = '찌르호크'
             self.race_hp = 85
             self.race_attack_rate = 120

@@ -23,7 +23,7 @@ class Cranidos(pokemon.Pokemon):
         self.race_special_attack_rate = 30
         self.race_special_defence_rate = 30
         self.race_speed_rate = 58
-
+        self.level_flag = 1
         self.xp = 0
         self.level = 12
         self.skill = {"따라가때리기" : (40,'physics'), "원시의힘" : (60,'special'), "사념의박치기" : (80,'physics'), "양날박치기" : (150,'physics')}
@@ -40,7 +40,10 @@ class Cranidos(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 30:
-            print('두개도스가 램펄드로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('두개도스가 램펄드로 진화하였습니다!')
+                self.level_flag = 0
+
             self.name = '램펄드'
             self.race_hp = 97
             self.race_attack_rate = 165

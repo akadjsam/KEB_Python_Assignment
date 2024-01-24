@@ -23,6 +23,7 @@ class Cherubi(pokemon.Pokemon):
         self.race_special_attack_rate = 62
         self.race_special_defence_rate = 53
         self.race_speed_rate = 35
+        self.level_flag = 1
 
         self.xp = 0
         self.level = 10
@@ -40,7 +41,9 @@ class Cherubi(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 36:
-            print('체리버가 체리꼬로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('체리버가 체리꼬로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '체리버'
             self.race_hp = 70
             self.race_attack_rate = 60

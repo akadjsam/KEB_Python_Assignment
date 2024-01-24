@@ -24,6 +24,7 @@ class Chimchar(pokemon.Pokemon):
         self.race_special_attack_rate = 58
         self.race_special_defence_rate = 44
         self.race_speed_rate = 61
+        self.level_flag = 1
 
         self.xp = 0
         self.level = 5
@@ -40,7 +41,9 @@ class Chimchar(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 14:
-            print('불꽃숭이가 파이숭이로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('불꽃숭이가 파이숭이로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '파이숭이'
             self.race_hp = 64
             self.race_attack_rate = 78
@@ -50,7 +53,9 @@ class Chimchar(pokemon.Pokemon):
             self.race_speed_rate = 81
 
         elif self.level == 36:
-            print('파이숭이가 초염몽으로 진화하였습니다!')
+            if self.level_flag == 0:
+                print('파이숭이가 초염몽으로 진화하였습니다!')
+                self.level_flag = 1
             self.name = '초염몽'
             self.race_hp = 76
             self.race_attack_rate = 104

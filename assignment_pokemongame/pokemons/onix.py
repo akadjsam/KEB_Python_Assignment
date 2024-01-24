@@ -23,6 +23,7 @@ class Onix(pokemon.Pokemon):
         self.race_special_attack_rate = 30
         self.race_special_defence_rate = 45
         self.race_speed_rate = 70
+        self.level_flag = 1
 
         self.xp = 0
         self.level = 10
@@ -40,7 +41,9 @@ class Onix(pokemon.Pokemon):
 
     def evolve(self):
         if self.level == 36:
-            print('롱스톤이 강철톤으로 진화하였습니다!')
+            if self.level_flag == 1:
+                print('롱스톤이 강철톤으로 진화하였습니다!')
+                self.level_flag = 0
             self.name = '강철톤'
             self.race_hp = 75
             self.race_attack_rate = 85
