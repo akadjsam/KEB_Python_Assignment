@@ -9,7 +9,7 @@ class Melisa:
         self.director.append(cherubi.Cherubi())
         self.director.append(roserade.Roserade())
 
-        #강석의 포켓몬 레벨 조정
+        #멜리사 포켓몬 레벨 조정
         self.director[0].level = 20
         self.director[1].level = 20
         self.director[2].level = 22
@@ -25,3 +25,4 @@ class Melisa:
     def lose_dialogue(self):
         print("당신 최고로 강해요. 나 진 것 알아요.")
         time.sleep(1)
+        print("레릭벳지를 획득하였습니다!")

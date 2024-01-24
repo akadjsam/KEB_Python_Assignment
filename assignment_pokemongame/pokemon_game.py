@@ -29,9 +29,9 @@ import random
 import sys
 
 from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade,\
-    lucario, machoke, meditite
+    lucario, machoke, meditite, floatzel,quagsire,gyrados
 
-from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu
+from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar
 
 
 # def print_delay(message): #print delay message
@@ -111,6 +111,8 @@ def set_director(badge):
         champion = uchae.Uchae()
     elif badge == 2:
         champion = jadu.Jadu()
+    elif badge == 3:
+        champion = maxillar.Maxillar()
     return champion
 
 if __name__ == '__main__':
@@ -125,7 +127,7 @@ if __name__ == '__main__':
     # time.sleep(1)
 
     #global pokemon_badge #포켓몬 벳지 수
-    pokemon_badge = 2
+    pokemon_badge = 3
     lose_flag = 0
     player = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
     select_starting() #스타팅 포켓몬 고르기
