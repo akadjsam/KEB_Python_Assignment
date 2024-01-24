@@ -29,7 +29,7 @@ import random
 import sys
 
 from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade,\
-    lucario, machoke, meditite, floatzel,quagsire,gyrados
+    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim
 
 from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar
 
@@ -113,6 +113,8 @@ def set_director(badge):
         champion = jadu.Jadu()
     elif badge == 3:
         champion = maxillar.Maxillar()
+    elif badge == 4:
+        champion = melisa.Melisa()
     return champion
 
 if __name__ == '__main__':

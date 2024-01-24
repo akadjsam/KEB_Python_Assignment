@@ -5,14 +5,14 @@ class Melisa:
     def __init__(self):
         self.name = '멜리사'
         self.director = []
-        self.director.append(turtwig.Turtwig())
-        self.director.append(cherubi.Cherubi())
-        self.director.append(roserade.Roserade())
+        self.director.append(drifblim.Drifblim())
+        self.director.append(fandom.Fandom())
+        self.director.append(mismagius.Mismagius())
 
         #멜리사 포켓몬 레벨 조정
-        self.director[0].level = 20
-        self.director[1].level = 20
-        self.director[2].level = 22
+        self.director[0].level = 32
+        self.director[1].level = 34
+        self.director[2].level = 36
 
         [self.director[i].ability() for i in range(len(self.director))] #강석의 포켓몬 종족값에 따른 능력치 설정
         print_delay('오-호호호!! 기다리고 있었어요!!')

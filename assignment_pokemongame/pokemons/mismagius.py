@@ -1,11 +1,11 @@
 from assignment_pokemongame import pokemon
-class Drifblim(pokemon.Pokemon):
+class Mismagius(pokemon.Pokemon):
     """
-    둥실라이드 종족값 498
+    무우마직 종족값 495
     """
     def __init__(self):
         super().__init__()
-        self.name = '둥실라이드'
+        self.name = '무우마직'
 
         self.hp = 0
         self.attack_rate = 0
@@ -14,16 +14,16 @@ class Drifblim(pokemon.Pokemon):
         self.special_defence_rate = 0
         self.speed_rate = 0
 
-        self.race_hp = 150
-        self.race_attack_rate = 80
-        self.race_defence_rate = 44
-        self.race_special_attack_rate = 90
-        self.race_special_defence_rate = 54
-        self.race_speed_rate = 80
+        self.race_hp = 60
+        self.race_attack_rate = 60
+        self.race_defence_rate = 60
+        self.race_special_attack_rate = 105
+        self.race_special_defence_rate = 105
+        self.race_speed_rate = 105
 
         self.xp = 0
         self.level = 34
-        self.skill = {"놀래키기" : (30,'physics'), "보복" : (50,'physics'), "괴상한바람" : (60,'special'), "섀도볼" : (80,'special')}
+        self.skill = {"사이코키네시스" : (90,'special'), "보복" : (50,'physics'), "악의파동" : (80,'special'), "섀도볼" : (80,'special')}
 
     def ability(self): #포켓몬 실제 능력치 계산
         super().ability()
