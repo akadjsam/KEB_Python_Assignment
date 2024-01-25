@@ -26,4 +26,4 @@ class Dongkwan:
     def lose_dialogue(self):
         print_delay('우-음! 단련한 포켓몬들이!!')
         time.sleep(1)
-        print("마인뱃지 획득하였습니다!")
+        print("마인뱃지를 획득하였습니다!")

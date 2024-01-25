@@ -29,9 +29,10 @@ import random
 import sys
 
 from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade,\
-    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon
+    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon,sneasel,piloswine,abomasnow,froslass\
 
-from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar,dongkwan
+
+from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar,dongkwan,muchung
 
 def select_starting():
     while True:  # select player's starting pokemon
@@ -113,6 +114,8 @@ def set_director(badge):
         champion = melisa.Melisa()
     elif badge == 5:
         champion = dongkwan.Dongkwan()
+    elif badge == 6:
+        champion = muchung.Muchung()
     return champion
 
 if __name__ == '__main__':
@@ -133,6 +136,7 @@ if __name__ == '__main__':
     select_starting() #스타팅 포켓몬 고르기
     print(f'스타팅 포켓몬으로 {player[0].name}을(를) 선택하셨습니다.')
     while True:
+        [player[i].ability() for i in range(len(player))] #플레이어의 능력치 재설정
         print(player[0].hp)
         print(player[0].attack_rate)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
@@ -268,7 +272,6 @@ if __name__ == '__main__':
 
                     if battle_end_flag == 1:
                         battle_end_flag = 0
-                        [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
                         break
                 if lose_flag == 1:
                     break
@@ -276,7 +279,6 @@ if __name__ == '__main__':
                 lose_flag = 0
             else:
                 pokemon_badge += 1
-                print(pokemon_badge)
                 rival.lose_dialogue() #포켓몬 관장들 패배 대사
                 print("포켓몬 벳지를 1개를 획득하셨습니다.")
         elif menu == '4':

@@ -35,7 +35,9 @@ class Pokemon:
         self.xp += target.level**3
         self.level_up()
     def level_up(self):
-        if self.xp >= self.level**3:
+        if self.level == 100:
+            self.level = 100
+        elif self.xp >= self.level**3:
             self.level += 1
             self.xp = 0
             print(f"레벨업! {self.name}의 레벨은 {self.level}입니다.")
