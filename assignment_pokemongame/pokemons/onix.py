@@ -40,7 +40,7 @@ class Onix(pokemon.Pokemon):
         super().attack(target, skill_number)
 
     def evolve(self):
-        if self.level == 36:
+        if self.level >= 36:
             if self.level_flag == 1:
                 print('롱스톤이 강철톤으로 진화하였습니다!')
                 self.level_flag = 0

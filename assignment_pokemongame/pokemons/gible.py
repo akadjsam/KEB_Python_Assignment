@@ -27,7 +27,7 @@ class Gible(pokemon.Pokemon):
         self.level_flag = 1
 
         self.xp = 0
-        self.level = 48
+        self.level = 99
         self.skill = {"드래곤크루" : (80,'physics'), "드래곤다이브" : (100,'physics'), "지진" : (100,'physics'), "불대문자" : (120,'special')}
 
     def ability(self): #포켓몬 실제 능력치 계산
@@ -54,7 +54,7 @@ class Gible(pokemon.Pokemon):
             self.race_special_defence_rate = 55
             self.race_speed_rate = 55
 
-        elif self.level == 48:
+        elif self.level >= 48:
             if self.level_flag == 0:
                 print('한바이트가 한카리아스로 진화하였습니다!')
                 self.level_flag = 1

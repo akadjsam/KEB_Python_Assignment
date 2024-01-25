@@ -29,14 +29,10 @@ import random
 import sys
 
 from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade,\
-    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim
+    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon
 
-from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar
+from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar,dongkwan
 
-
-# def print_delay(message): #print delay message
-#     print(message)
-#     time.sleep(1)
 def select_starting():
     while True:  # select player's starting pokemon
         print("포켓몬을 선택하세요", end=' ')
@@ -115,6 +111,8 @@ def set_director(badge):
         champion = maxillar.Maxillar()
     elif badge == 4:
         champion = melisa.Melisa()
+    elif badge == 5:
+        champion = dongkwan.Dongkwan()
     return champion
 
 if __name__ == '__main__':
@@ -129,14 +127,14 @@ if __name__ == '__main__':
     # time.sleep(1)
 
     #global pokemon_badge #포켓몬 벳지 수
-    pokemon_badge = 3
+    pokemon_badge = 5
     lose_flag = 0
     player = [] #포켓몬 포획시 리스트에 담기. 개발 진행중
     select_starting() #스타팅 포켓몬 고르기
     print(f'스타팅 포켓몬으로 {player[0].name}을(를) 선택하셨습니다.')
     while True:
-        # print(player[0].hp)
-        # print(player[0].attack_rate)
+        print(player[0].hp)
+        print(player[0].attack_rate)
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
                      f'\t3)포켓몬 관장에게 도전하기({pokemon_badge+1}번째 관장)"\t4)내 포켓몬 확인하기\t5)게임 종료 : ')
         if menu == '1':
