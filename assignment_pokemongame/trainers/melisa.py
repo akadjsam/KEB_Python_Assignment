@@ -4,17 +4,17 @@ from assignment_pokemongame.function import *
 class Melisa:
     def __init__(self):
         self.name = '멜리사'
-        self.director = []
-        self.director.append(drifblim.Drifblim())
-        self.director.append(fandom.Fandom())
-        self.director.append(mismagius.Mismagius())
+        self.pokemon_list = []
+        self.pokemon_list.append(drifblim.Drifblim())
+        self.pokemon_list.append(fandom.Fandom())
+        self.pokemon_list.append(mismagius.Mismagius())
 
         #멜리사 포켓몬 레벨 조정
-        self.director[0].level = 32
-        self.director[1].level = 34
-        self.director[2].level = 36
+        self.pokemon_list[0].level = 32
+        self.pokemon_list[1].level = 34
+        self.pokemon_list[2].level = 36
 
-        [self.director[i].ability() for i in range(len(self.director))] #강석의 포켓몬 종족값에 따른 능력치 설정
+        [self.pokemon_list[i].ability() for i in range(len(self.pokemon_list))] #강석의 포켓몬 종족값에 따른 능력치 설정
         print_delay('오-호호호!! 기다리고 있었어요!!')
         print_delay('저 이 나라에 와서 많이 공부했어요. 이 마을은 콘테스트 해요. 그래서 전 이런 복장이죠.')
         print_delay('포켓몬에 대해서도 공부했어요. 그랬더니 체육관 관장이 되었어요. ')

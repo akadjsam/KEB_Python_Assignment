@@ -4,17 +4,17 @@ from assignment_pokemongame.function import *
 class Kangsuk:
     def __init__(self):
         self.name = '강석'
-        self.director = []
-        self.director.append(geodude.Geodude())
-        self.director.append(onix.Onix())
-        self.director.append(cranidos.Cranidos())
+        self.pokemon_list = []
+        self.pokemon_list.append(geodude.Geodude())
+        self.pokemon_list.append(onix.Onix())
+        self.pokemon_list.append(cranidos.Cranidos())
 
         #강석의 포켓몬 레벨 조정
-        self.director[0].level = 12
-        self.director[1].level = 12
-        self.director[2].level = 12
+        self.pokemon_list[0].level = 12
+        self.pokemon_list[1].level = 12
+        self.pokemon_list[2].level = 12
 
-        [self.director[i].ability() for i in range(len(self.director))] #강석의 포켓몬 종족값에 따른 능력치 설정
+        [self.pokemon_list[i].ability() for i in range(len(self.pokemon_list))] #강석의 포켓몬 종족값에 따른 능력치 설정
         print_delay('무쇠시티 포켓몬체육관에 잘 왔어!')
         print_delay('내가 체육관 관장 강석이야!')
         print_delay('우리 인간은 포켓몬과 사이좋게 살고 있지. 함께 놀기도 하고 힘을 합쳐 일하기도 하고 그리고 포켓몬끼리 싸우게 하여 유대감을 돈독히 다지기도 하고...')

@@ -27,12 +27,15 @@
 import copy
 import random
 import sys
+import wild
 
 from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, piplup, turtwig, geodude,cherubi,roserade,\
-    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon,sneasel,piloswine,abomasnow,froslass\
+    lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon,sneasel,piloswine,\
+    abomasnow,froslass
 
 
 from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar,dongkwan,muchung
+from function import *
 
 def select_starting():
     while True:  # select player's starting pokemon
@@ -78,23 +81,6 @@ def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
         else:
             monster = onix.Onix()
     return monster
-def battle(player1,player2):
-    if player1.speed_rate >= player2.speed_rate:
-        player1.attack(player2, choice_skill_number - 1)
-        if player2.hp <= 0:
-            player1.experience_value(player2)
-            return 1
-        player2.attack(player1, random.randrange(4))
-        if player1.hp <= 0:
-            return 1
-    else:
-        player2.attack(player1, random.randrange(4))
-        if player1.hp <= 0:
-            return 1
-        player1.attack(player2, choice_skill_number - 1)
-        if player2.hp <= 0:
-            player1.experience_value(player2)
-            return 1
 def change_pokemon(change):
     if change in ('2', '3', '4', '5', '6'):
         if len(player) < int(change):
@@ -142,73 +128,51 @@ if __name__ == '__main__':
         menu = input(f'"메뉴를 선택하세요 : 1)야생포켓몬과 전투\t2)포켓몬 트레이너와 전투'
                      f'\t3)포켓몬 관장에게 도전하기({pokemon_badge+1}번째 관장)"\t4)내 포켓몬 확인하기\t5)게임 종료 : ')
         if menu == '1':
-            enemy = wild_pokemon(int((sum(player[i].level for i in range(len(player))))/len(player)))
-            enemy.ability()
-            print(f'"앗! 야생의 {enemy.name}이(가) 나타났다! Lv{enemy.level}"')
+            enemy = wild.Wild()
+            enemy.pokemon_list.append(wild_pokemon(int((sum(player[i].level for i in range(len(player)))) / len(player))))
+            enemy.pokemon_list[0].ability()
+            print(f'"앗! 야생의 {enemy.pokemon_list[0].name}이(가) 나타났다! Lv{enemy.pokemon_list[0].level}"')
             print(f'"가랏 {player[0].name}! Lv{player[0].level}"')
-            while True:
-                choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
-                if choice == '1': #포켓몬 배틀
-                    while True:
-                        print()
-                        print("사용할 스킬을 선택하세요(1 ~ 4)")
-                        print(", ".join(list(player[0].skill.keys()))," : ")
-                        choice_skill_number = input()
-                        if choice_skill_number in ('1', '2', '3', '4'):
-                            choice_skill_number = int(choice_skill_number)
-                            battle_end_flag = battle(player[0],enemy)
-                            print(player[0].hp)
-                            if player[0].hp == 0:
-                                if sum([player[i].hp for i in range(len(player))])/len(player) == 0:
-                                    print("더이상 전투할 포켓몬이 없습니다. 포켓몬 센터로 이동합니다.")
-                                    break
-                                else:
-                                    while True:
-                                        print("어느 포켓몬으로 교체하시겠습니까?")
-                                        print(", ".join([(f'{i+1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
-                                        change_sequence = input("몇번째 포켓몬을 첫번째로 하시겠습니까? : ")
-                                        change_pokemon(change_sequence)
-                                        if player[0].hp == 0:
-                                            print("해당 포켓몬은 싸울 힘이 남아있지 않습니다.")
-                                            print()
-                                            continue
-                                        else:
-                                            print(f'"가랏 {player[0].name}! Lv{player[0].level}"')
-                                            break
-                                    continue
-                            print()
-                            break
-                        else:
-                            print("1,2,3,4 중에 한개를 골라주세요!")
-
-                elif choice == '2':
-                    if player[0].speed_rate <= enemy.speed_rate:
-                        print("도망칠 수 없습니다!")
-                        continue
-                    else:
-                        print("무사히 도망쳤다!")
-                        break
-
-                elif choice == '3':
-                    if len(player) > 5:
-                        print("더 이상 포켓몬을 포획할 수 없습니다.")
-                        continue
-                    else:
-                        if random.randrange(0,3) == 0: #포켓몬 잡을 확률 1/3
-                            catch = copy.deepcopy(enemy)
-                            player.append(catch)
-                            print("포획 성공 !")
-                        else:
-                            print("포획에 실패했습니다!")
+            i = 0
+            while i < len(enemy.pokemon_list):
+                while True:
+                    choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
+                    if choice == '1':  # 포켓몬 배틀
+                        while True:
+                            battle_end_flag, lose_flag = skillbattle(player, enemy, i)
+                            if enemy.pokemon_list[i].hp == 0:
+                                i += 1
+                                break
+                    elif choice == '2':
+                        if player[0].speed_rate <= enemy.pokemon_list[i].speed_rate:
+                            print("도망칠 수 없습니다!")
                             continue
-                    break
-                else:
-                    print("메뉴 중 선택하세요.")
-                    continue
-                if battle_end_flag == 1:
-                    battle_end_flag = 0
-                    [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
-                    break
+                        else:
+                            print("무사히 도망쳤다!")
+                            i += 1
+                            break
+
+                    elif choice == '3':
+                        if len(player) > 5:
+                            print("더 이상 포켓몬을 포획할 수 없습니다.")
+                            continue
+                        else:
+                            if random.randrange(0,3) == 0: #포켓몬 잡을 확률 1/3
+                                catch = copy.deepcopy(enemy.pokemon_list[i])
+                                player.append(catch)
+                                print("포획 성공 !")
+                                i += 1
+                            else:
+                                print("포획에 실패했습니다!")
+                                continue
+                        break
+                    else:
+                        print("메뉴 중 선택하세요.")
+                        continue
+                    if battle_end_flag == 1:
+                        battle_end_flag = 0
+                        [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
+                        break
 
         elif menu == '2':
             print("개발 진행중입니다.")
@@ -218,45 +182,16 @@ if __name__ == '__main__':
             #.director
             print(f'포켓몬 관장 {rival.name}이(가) 승부를 걸어왔다!')
             i = 0
-            while i < len(rival.director):
-                print(f'{rival.name}은 {rival.director[i].name}을(를) 내보냈다!')
+            while i < len(rival.pokemon_list):
+                print(f'{rival.name}은 {rival.pokemon_list[i].name}을(를) 내보냈다!')
                 while True:
                     choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
                     if choice == '1': #포켓몬 배틀
                         while True:
-                            print()
-                            print("사용할 스킬을 선택하세요(1 ~ 4)")
-                            print(", ".join(list(player[0].skill.keys()))," : ")
-                            choice_skill_number = input()
-                            if choice_skill_number in ('1', '2', '3', '4'):
-                                choice_skill_number = int(choice_skill_number)
-                                battle_end_flag = battle(player[0], rival.director[i])
-                                if player[0].hp == 0:
-                                    if sum([player[i].hp for i in range(len(player))])/len(player) == 0:
-                                        print("더이상 전투할 포켓몬이 없습니다. 포켓몬 센터로 이동합니다.")
-                                        lose_flag = 1
-                                        break
-                                    else:
-                                        while True:
-                                            print("어느 포켓몬으로 교체하시겠습니까?")
-                                            print(", ".join([(f'{i+1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
-                                            change_sequence = input("몇번째 포켓몬을 첫번째로 하시겠습니까? : ")
-                                            change_pokemon(change_sequence)
-                                            if player[0].hp == 0:
-                                                print("해당 포켓몬은 싸울 힘이 남아있지 않습니다.")
-                                                print()
-                                                continue
-                                            else:
-                                                print(f'"가랏 {player[0].name}! Lv{player[0].level}"')
-                                                break
-                                        continue
-                                print()
+                            battle_end_flag, lose_flag = skillbattle(player, rival,i)
+                            if rival.pokemon_list[i].hp == 0:
+                                i += 1
                                 break
-                            else:
-                                print("1,2,3,4 중에 한개를 골라주세요!")
-                        if rival.director[i].hp == 0:
-                            i += 1
-                            break
 
                     elif choice == '2':
                         print("안돼! 싸움 중 등을 보일 순 없어!")
@@ -280,7 +215,7 @@ if __name__ == '__main__':
             else:
                 pokemon_badge += 1
                 rival.lose_dialogue() #포켓몬 관장들 패배 대사
-                print("포켓몬 벳지를 1개를 획득하셨습니다.")
+                print(f"포켓몬 벳지를 1개를 획득하셨습니다. 획득한 포켓몬 벳지는 총 {pokemon_badge}개 입니다.")
         elif menu == '4':
             print(", ".join([(f'{i+1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
             decide_change = input("포켓몬 순서를 변경하시겠습니까? : 1)예\t2)아니요 : ")#change_sequence
@@ -292,5 +227,42 @@ if __name__ == '__main__':
         elif menu == '5':
             print('게임을 종료합니다.')
             break
+        elif menu == '981123':
+            rival = wild.Wild()
+            for i in range(len(player)):
+                rival.pokemon_list.append(copy.deepcopy(player[i]))
+            # .director
+            print(f'의문의 포켓몬트레이너가 승부를 걸어왔다.')
+            i = 0
+            while i < len(rival.pokemon_list):
+                print(f'의문의 포켓몬트레이너는 {rival.pokemon_list[i].name}을(를) 내보냈다!')
+                while True:
+                    choice = input("1)싸운다.\t2)도망간다.\t3)포획한다. : ")
+                    if choice == '1':  # 포켓몬 배틀
+                        while True:
+                            battle_end_flag, lose_flag = skillbattle(player, rival, i)
+                            if rival.pokemon_list[i].hp == 0:
+                                i += 1
+                                break
+
+                    elif choice == '2':
+                        print("안돼! 싸움 중 등을 보일 순 없어!")
+                        continue
+
+                    elif choice == '3':
+                        print("남의 것에 손대면 도둑!")
+                        continue
+
+                    else:
+                        print("다시선택하세요!")
+                        continue
+
+                    if battle_end_flag == 1:
+                        battle_end_flag = 0
+                        break
+                if lose_flag == 1:
+                    break
+            if lose_flag == 1:
+                lose_flag = 0
         else:
             print("메뉴중에 선택하세요!")

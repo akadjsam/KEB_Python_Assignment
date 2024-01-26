@@ -7,7 +7,7 @@ class Froslass(pokemon.Pokemon):
     """
     def __init__(self):
         super().__init__()
-        self.name = '눈설왕'
+        self.name = '눈여아'
 
         self.hp = 0
         self.attack_rate = 0

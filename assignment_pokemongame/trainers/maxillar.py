@@ -5,17 +5,17 @@ from assignment_pokemongame.function import *
 class Maxillar:
     def __init__(self):
         self.name = '맥실러'
-        self.director = []
-        self.director.append(gyrados.Gyarados())
-        self.director.append(quagsire.Quagsire())
-        self.director.append(floatzel.Floatzel())
+        self.pokemon_list = []
+        self.pokemon_list.append(gyrados.Gyarados())
+        self.pokemon_list.append(quagsire.Quagsire())
+        self.pokemon_list.append(floatzel.Floatzel())
 
         #강석의 포켓몬 레벨 조정
-        self.director[0].level = 33
-        self.director[1].level = 34
-        self.director[2].level = 37
+        self.pokemon_list[0].level = 33
+        self.pokemon_list[1].level = 34
+        self.pokemon_list[2].level = 37
 
-        [self.director[i].ability() for i in range(len(self.director))] #강석의 포켓몬 종족값에 따른 능력치 설정
+        [self.pokemon_list[i].ability() for i in range(len(self.pokemon_list))] #강석의 포켓몬 종족값에 따른 능력치 설정
         print_delay('잘- 왔다!! 내가 들판시티 포켓몬체육관의 체육관 관장인 그 이름도 맥시멈가면!')
         print_delay('물의 힘으로 단련한 나의 포켓몬은! 너의 공격을 전부 받아들인 뒤에 승리할 테니 덤벼랏!')
 
