@@ -36,7 +36,7 @@ class Pokemon:
         self.level_up()
     def level_up(self):
         if self.level == 100:
-            self.level = 100
+            pass #레벨 100도달하면 레벨업 하지않음
         elif self.xp >= self.level**3:
             self.level += 1
             self.xp = 0

@@ -1,7 +1,7 @@
 import time
 
 from assignment_pokemongame.pokemon_game import *
-
+#main에 사용할 함수들을 정의
 def print_delay(message): #print delay message
     print(message)
     time.sleep(1)
@@ -27,7 +27,7 @@ def skillbattle(player, rival,i):
     while True:
         print()
         print("사용할 스킬을 선택하세요(1 ~ 4)")
-        print(", ".join(list(player[0].skill.keys())), " : ")
+        print(", ".join(list(player[0].skill.keys())), " : ",end="")
         choice_skill_number = input()
         if choice_skill_number in ('1', '2', '3', '4'):
             choice_skill_number = int(choice_skill_number)
