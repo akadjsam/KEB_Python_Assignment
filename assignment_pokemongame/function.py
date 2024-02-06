@@ -1,7 +1,15 @@
 import time
 
 from assignment_pokemongame.pokemon_game import *
+
+
 #main에 사용할 함수들을 정의
+def change_pokemon(player, change):
+    if change in ('2', '3', '4', '5', '6'):
+        if len(player) < int(change):
+            print("해당 위치에 포켓몬이 없습니다!")
+        else:
+            player[0], player[int(change) - 1] = player[int(change) - 1], player[0]
 def print_delay(message): #print delay message
     print(message)
     time.sleep(1)
@@ -42,7 +50,7 @@ def skillbattle(player, rival,i):
                         print("어느 포켓몬으로 교체하시겠습니까?")
                         print(", ".join([(f'{i + 1})Lv{player[i].level} : ') + player[i].name for i in range(len(player))]))
                         change_sequence = input("몇번째 포켓몬을 첫번째로 하시겠습니까? : ")
-                        change_pokemon(change_sequence)
+                        change_pokemon(player, change_sequence)
                         if player[0].hp == 0:
                             print("해당 포켓몬은 싸울 힘이 남아있지 않습니다.")
                             print()

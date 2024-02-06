@@ -33,7 +33,6 @@ from assignment_pokemongame.pokemons import gible, onix, chimchar, cranidos, pip
     lucario, machoke, meditite, floatzel,quagsire,gyrados,fandom,mismagius,drifblim,coil,bastiodon,sneasel,piloswine,\
     abomasnow,froslass, shinx,pikachu,electivire,jolteon
 
-
 from assignment_pokemongame.trainers import uchae, kangsuk, melisa, jadu, maxillar,dongkwan,muchung, jeonjin
 from function import *
 
@@ -69,9 +68,9 @@ def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
     if level < 10:
         random_num = random.randrange(2)
         if random_num == 1:
-            monster = cranidos.Cranidos()
+            monster = turtwig.Turtwig() #monster = cranidos.Cranidos()
         else:
-            monster = onix.Onix()
+            monster = turtwig.Turtwig() #monster = onix.Onix()
     elif level < 15:
         monster = geodude.Geodude()
     else:
@@ -81,12 +80,7 @@ def wild_pokemon(level): #나중에 포켓몬 랜덤으로 바꾸기
         else:
             monster = onix.Onix()
     return monster
-def change_pokemon(change):
-    if change in ('2', '3', '4', '5', '6'):
-        if len(player) < int(change):
-            print("해당 위치에 포켓몬이 없습니다!")
-        else:
-            player[0], player[int(change) - 1] = player[int(change) - 1], player[0]
+
 def set_director(badge):
     if badge == 0:
         champion = kangsuk.Kangsuk()
@@ -146,7 +140,7 @@ if __name__ == '__main__':
                             battle_end_flag, lose_flag = skillbattle(player, enemy, i)
                             if enemy.pokemon_list[i].hp == 0:
                                 i += 1
-                                break
+                            break
                     elif choice == '2':
                         if player[0].speed_rate <= enemy.pokemon_list[i].speed_rate:
                             print("도망칠 수 없습니다!")
@@ -177,6 +171,9 @@ if __name__ == '__main__':
                         battle_end_flag = 0
                         [player[i].ability() for i in range(len(player))]  # 전투 종료후 플레이어의 능력치 재설정
                         break
+                if lose_flag == 1:
+                    lose_flag = 0
+                    break
 
         elif menu == '2':
             print("개발 진행중입니다.")
@@ -195,7 +192,7 @@ if __name__ == '__main__':
                             battle_end_flag, lose_flag = skillbattle(player, rival,i)
                             if rival.pokemon_list[i].hp == 0:
                                 i += 1
-                                break
+                            break
 
                     elif choice == '2':
                         print("안돼! 싸움 중 등을 보일 순 없어!")
@@ -213,9 +210,9 @@ if __name__ == '__main__':
                         battle_end_flag = 0
                         break
                 if lose_flag == 1:
+                    lose_flag = 0
                     break
-            if lose_flag == 1:
-                lose_flag = 0
+
             else:
                 pokemon_badge += 1
                 rival.lose_dialogue() #포켓몬 관장들 패배 대사
@@ -225,12 +222,15 @@ if __name__ == '__main__':
             decide_change = input("포켓몬 순서를 변경하시겠습니까? : 1)예\t2)아니요 : ")#change_sequence
             if decide_change == '1':
                 change_sequence = input("몇번째 포켓몬을 첫번째로 하시겠습니까? : ")
-                change_pokemon(change_sequence)
+                change_pokemon(player, change_sequence)
             else:
                 print("포켓몬 순서변경을 취소하셨습니다. 메뉴로 돌아갑니다.")
         elif menu == '5':
             print('게임을 종료합니다.')
             break
+        else:
+            print("메뉴중에 선택하세요!")
+
         if pokemon_badge == 8:
             print("신오지방의 챔피언이 되었습니다.! 게임을 종료하시겠습니까?")
             end = input("Y/N : ")
@@ -252,7 +252,7 @@ if __name__ == '__main__':
                                 battle_end_flag, lose_flag = skillbattle(player, rival, i)
                                 if rival.pokemon_list[i].hp == 0:
                                     i += 1
-                                    break
+                                break
 
                         elif choice == '2':
                             print("안돼! 싸움 중 등을 보일 순 없어!")
@@ -274,5 +274,3 @@ if __name__ == '__main__':
                 if lose_flag == 1:
                     lose_flag = 0
             sys.exit()
-        else:
-            print("메뉴중에 선택하세요!")
